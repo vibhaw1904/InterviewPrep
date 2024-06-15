@@ -1,6 +1,7 @@
 import Image from "next/image";
 import prisma from "@/db";
 import Link from "next/link";
+import TodoCard from "@/components/TodoCard";
 
 function getTodos(){
   return prisma.todo.findMany()
@@ -16,10 +17,10 @@ export default async function Home() {
       <Link href='/new' className="border border-slate-300 text-slate-300 px-2 py-1 rounded hover:bg-slate-700">New</Link>
 
     </header>
-    <ul>
+    <ul className="flex justify-center ">
      {
       todos.map((todo)=>(
-        <li key={todo.id}>{todo.title}</li>
+       <TodoCard key={todo.id} {...todo}/>
       ))
      }
     </ul>
