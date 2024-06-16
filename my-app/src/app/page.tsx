@@ -6,10 +6,13 @@ import TodoCard from "@/components/TodoCard";
 function getTodos(){
   return prisma.todo.findMany()
 }
-
+async function toggleTodo(id:string,complete:boolean){
+  "use server"
+await prisma.todo.update({where:{id},data:{complete}})
+}
 export default async function Home() {
   const todos=await getTodos()
-  // await prisma.todo.create({data:{title:'test2',complete:false}})
+
   return (
    <>
     <header className="text-2xl flex justify-between  items-center mb-4 mt-3">
@@ -20,7 +23,7 @@ export default async function Home() {
     <ul className="flex justify-center ">
      {
       todos.map((todo)=>(
-       <TodoCard key={todo.id} {...todo}/>
+       <TodoCard key={todo.id} {...todo} toggleTodo={toggleTodo}/>
       ))
      }
     </ul>
