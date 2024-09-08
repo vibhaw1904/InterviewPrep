@@ -1,10 +1,12 @@
 import "./styles.css";
 import { CiStar } from "react-icons/ci";
 import { useState } from "react";
+
 export default function App() {
   const stars = Array(5).fill(0);
   const [rating, setRating] = useState(0);
   const [colors, setColors] = useState(Array(5).fill("gray"));
+  const [hoverValue, setHoverValue] = useState(undefined);
 
   const handleClick = (value) => {
     if (value === rating) {
@@ -16,6 +18,20 @@ export default function App() {
         prevColors.map((color, index) => (index < value ? "green" : "gray"))
       );
     }
+  };
+
+  const handleHoverStart = (value) => {
+    setHoverValue(value);
+    setColors((prevColors) =>
+      prevColors.map((color, index) => (index < value ? "lightgreen" : "gray"))
+    );
+  };
+
+  const handleHoverLeave = () => {
+    setHoverValue(undefined);
+    setColors((prevColors) =>
+      prevColors.map((color, index) => (index < rating ? "green" : "gray"))
+    );
   };
 
   return (
@@ -31,6 +47,8 @@ export default function App() {
                 fontSize: "30px",
                 cursor: "pointer",
               }}
+              onMouseOver={() => handleHoverStart(index + 1)}
+              onMouseLeave={handleHoverLeave}
             />
           ))}
 
