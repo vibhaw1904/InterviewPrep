@@ -1,0 +1,23 @@
+.App {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .title {
+    font-size: larger;
+    font: bold;
+  }
+  .titleh {
+    font-size: larger;
+    font: bold;
+    text-align: center;
+  }
+  .lables {
+    display: flex;
+    justify-content: space-between;
+  }
+  .slider {
+    width: 100%;
+  }
+  
